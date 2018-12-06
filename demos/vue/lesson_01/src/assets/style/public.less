@@ -1,0 +1,119 @@
+html,
+body{
+  width:100%;
+  background-color: #f8f8f8;
+}
+.slide-y-enter-active {
+  animation: slide-y-in .4s;
+}
+.slide-y-leave-active {
+  animation: slide-y-in .4s reverse;
+}
+@keyframes slide-y-in {
+  0% {
+    transform: translateY(100%);
+    opacity:0.6;
+  }
+  100% {
+    transform: translateY(0);
+    opacity:1
+  }
+}
+
+.slide-x-enter-active {
+  animation: slide-x-in .4s;
+}
+.slide-x-leave-active {
+  animation: slide-x-in .4s reverse;
+}
+@keyframes slide-x-in {
+  0% {
+    transform: translateX(100%);
+    opacity:0.6;
+  }
+  100% {
+    transform: translateX(0);
+    opacity:1
+  }
+}
+
+
+.slide-xy-enter-active {
+  animation: slide-xy-in .4s;
+}
+.slide-xy-leave-active {
+  animation: slide-xy-out .4s;
+}
+@keyframes slide-xy-in {
+  0% {
+    transform: translateY(100%);
+    opacity:0.6;
+  }
+  100% {
+    transform: translateY(0);
+    opacity:1
+  }
+}
+@keyframes slide-xy-out {
+  0% {
+    transform: translateX(0);
+    opacity:1
+  }
+  100% {
+    transform: translateX(100%);
+    opacity:0;
+  }
+}
+
+
+.fade-enter-active {
+  animation: fade-in .2s;
+}
+.fade-leave-active {
+  animation: fade-in .2s reverse;
+}
+@keyframes fade-in {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1
+  }
+}
+
+.zoom-enter-active {
+  animation: zoom-in .4s;
+}
+.zoom-leave-active {
+  animation: zoom-in .4s reverse;
+}
+@keyframes zoom-in {
+  0% {
+    transform: scale(0);
+    opacity:0;
+  }
+  100% {
+    transform: scale(1);
+    opacity:1
+  }
+}
+
+.page-move-enter, 
+.page-move-leave-active{
+  transform: translate(100%, 0);
+}
+.page-move-enter-active, 
+.page-move-leave-active{
+  transition: transform .3s;
+}
+
+
+.page{
+  width:100%;
+  padding-top:80px;
+}
+@media screen and (max-width: 780px) {
+  .page{
+    padding-top:48px;
+  }
+}
