@@ -1,10 +1,11 @@
 
 <template>
 <dl>
-  <dt>毛毛</dt>
+  <dt>猫猫</dt>
   <dd>
-    <p>maomao</p>
-    <p>maomao</p>
+    <p>大家好，我是爸爸女儿猫猫！</p>
+    <p>我喜欢加菲猫好久了，我想对爸爸说，我非她不娶</p>
+    <p>现在的猫猫刚出生就谈恋爱了，我都这么大了，还没个对象！</p>
   </dd>
 </dl>
 
@@ -24,15 +25,16 @@ export default {
     name : ""
   },
   methods : {
-    han(){
-      alert("我是毛毛2222")
-    },
-    makeLove(){
-      alert("谈恋爱3333")
+    fallInLove(){
+      alert("我喜欢加菲猫好久了，爸爸妈妈，我非她不嫁。")
     }
   }
 }
 </script>
 
 <style scoped>
+dl{
+  background-color: #c88;
+  padding:8px;
+}
 </style>

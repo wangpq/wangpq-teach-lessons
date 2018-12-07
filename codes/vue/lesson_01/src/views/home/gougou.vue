@@ -3,13 +3,18 @@
 <dl>
   <dt >{{name}}---{{title}}</dt>
   <dd>
-    <p>狗狗狗狗狗狗</p>
-    <p>狗狗狗狗狗狗</p>
+    <p>我是爸爸的儿子，单身狗。</p>
+    <p>我最喜欢隔壁的二哈狗啦，可爸爸不让我们谈恋爱。</p>
   </dd>
-
-  <h5 @click="toBaBa">点击子向父传递值</h5>
-
+  <button @click="tellToFather">狗狗对爸爸说：子向父传值</button>
   <br>
+
+  <button @click="onListenParent">偷听爸爸跟妈妈的话：孩子调用父亲方法</button>
+  <br>
+
+  <button @click="onListenSister">听姐姐说的话：平辈之间方法调用</button>
+  <br>
+
 </dl>
 
 </template>
@@ -20,7 +25,7 @@
 export default {
   data () {
     return {
-      fav : "喜欢吃香蕉o"
+      love : "二哈是我最喜欢的姑娘，没有二哈，我日子没法过啦！"
     }
   },
   props: { 
@@ -28,21 +33,32 @@ export default {
     name : ""
   },
   methods : {
-    hanBaBa(){
+    onListenParent(){
       // 孩子调用父亲方法
       this.$parent.loveWife();
-      // 兄弟姐妹之间
-      //this.$parent.$children[1].han();
-      this.$parent.$refs.maomao.han();  
     },
-    toBaBa(){
+    onListenSister(){
+      // 兄弟姐妹之间
+      //this.$parent.$children[1].fallInLove();
+      this.$parent.$refs.maomao.fallInLove();  
+    },
+    tellToFather(){
       // 子向父传递值
-      this.$emit("BaBaListen",this.fav);
+      this.$emit("child-to-parent",this.love);
     }
-
   }
 }
 </script>
 
 <style scoped>
+dl{
+  background-color: pink;
+  padding:8px;
+}
+button{
+  background-color: #33a;
+  color:#fff;
+  padding:4px;
+  margin-bottom: 4px;
+}
 </style>

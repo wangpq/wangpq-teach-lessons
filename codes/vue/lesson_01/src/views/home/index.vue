@@ -1,29 +1,35 @@
 
 <template>
-<div>
+<div class="wrap">
+  <header>
+    <h1>一个Vue通信的简单示例</h1>
+  </header>
+  <article>
+    <gougou name="狗狗" :title="gouTitle" @child-to-parent="autoListenChildVoice"></gougou>
+    <br>
+    <maomao ref="maomao"></maomao> 
+    <br>
+    <section class="body">
+      <button @click="onListenChildVoice">父亲听猫猫说什么：父调用子的方法</button>
+      <h2>{{desc}}</h2>
+      <h2>豆瓣电影排行版</h2>
+      <ul>
+        <li v-for="(movie,index) in movies" :key="movie.id">
+          {{index+1}}、 {{movie.title}}
+        </li>
+      </ul>
+      <br>
+    </section>
+  </article>
 
-   <gougou name="sdsd" :title="gouTitle" @BaBaListen="onBaBaListen"></gougou>
-   <maomao ref="maomao"></maomao> 
-   <h2>{{title}}</h2>
-   <section class="body">
-    <ul v-for="(item,index) in product" :key="item.id">
-      <li>
-        <span>{{index+1}}、</span>
-        <span>{{item.cateName}}</span>
-        <span>{{item.productNo}}</span>
-      </li>
-    </ul>
-   </section>
-
-   <br>
-   <button @click="ListenChild">父亲调用孩子的方法</button>
  </div> 
 </template>
 
 
 <script>
 
-//import $http from '@/utils/httputils'
+import jsonp from 'jsonp'
+import {menu} from '@/data.js'
 import gougou from '@/views/home/gougou'
 import maomao from '@/views/home/maomao'
 
@@ -34,53 +40,64 @@ export default {
   },
   data () {
     return {
-      title : "门店MM",
-      product : [],
+      desc : "我是孩子们的父亲，现在的孩子啊，就是早恋，不省心。孩子他妈，我们看看电影，放松一下啊！",
+      movies : [],
       gouTitle : ""
     }
   },
-  props: {
-    
-  },
   mounted(){
-    //this.getProduct();
+    this.getMovies();
   },
   methods : {
-    getProduct(){
-      $http({
-        path: "http://10.10.200.49:8082/product/union/page",
-        method: 'get'
-      }).then(res => {  
-        if(res && res.data && res.data.success){
-          let data=res.data.data;
-          data.gou="刘欢儿子111";
-
-          this.gouTitle=data.gou;
-          this.product=data;
-        }   
-      }) 
+    getMovies(){
+      jsonp('https://api.douban.com/v2/movie/top250?count=10', null, (err, data) => {
+        if(err) {
+          console.error(err.message);
+        }else{  
+          if(data && data.subjects.length > 0) {
+            this.movies =data.subjects
+          }
+        }
+      })
     },
-    onBaBaListen(val){
-      let txt="父亲获取孩子说的话："
+    autoListenChildVoice(val){
+      let txt="爸爸使用了高科技，自动获取孩子说的话,："
       alert(txt+val)
     },
     loveWife(){
-      alert("我爱你妈妈");
+      alert("我爱你,亲爱的老婆！你说我们的孩子怎么都不听话呢！");
     },
-    ListenChild(){ 
+    onListenChildVoice(){ 
       // 父亲调用孩子的方法
-      //this.$refs.maomao.makeLove();
-      this.$children[1].makeLove();
+      //this.$refs.maomao.fallInLove();
+      this.$children[1].fallInLove();
     }
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+header{
+  background-color: #f0f0f0;
+  padding:8px;
+  h1{
+    font-weight: bold;
+    color:#f00;
+  }
+}
+
+article{
+  padding:8px;
+}
 h2{
-  background: #f00;
+  font-weight: bold;
 }
 .body{
-  background-color: #ccc;
+  background-color: orange;
+}
+button{
+  background-color: #5a5;
+  color:#fff;
+  padding:4px;
 }
 </style>
