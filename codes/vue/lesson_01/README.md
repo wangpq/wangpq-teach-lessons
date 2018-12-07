@@ -88,9 +88,27 @@ export default {
 ``` 
 
 
-## 子组件使用同辈(兄弟姐妹)组件的方法
+## 父组件使用子组件的方法
 
-使用 this.$parent.$children[索引值].方法名()  or this.$parent.$refs.同辈名称.方法名()
+使用 this.$children[索引值].方法名()  或者 this.$refs.孩子名称.方法名()
+
+父组件 index.vue：
+``` bash
+export default {
+  methods : {
+    onListenChildVoice(){ 
+      // 父亲调用孩子的方法
+      //this.$refs.maomao.fallInLove();
+      this.$children[1].fallInLove();
+    }
+  }
+}  
+``` 
+
+
+## 同辈(兄弟姐妹)组件方法调用
+
+使用 this.$parent.$children[索引值].方法名()  或者 this.$parent.$refs.同辈名称.方法名()
 
 子组件 gougou.vue：
 
@@ -109,19 +127,8 @@ export default {
 ``` 
 
 
-## 父组件使用子组件的方法
+## 同辈(兄弟姐妹)组件之间传值
 
-使用 this.$children[索引值].方法名()  or this.$refs.孩子名称.方法名()
+原始的方法是通过父组件作为中介，子组件通过$emit先向父组件通信，然后父组件再通过属性向它的兄弟组件通信。
 
-父组件 index.vue：
-``` bash
-export default {
-  methods : {
-    onListenChildVoice(){ 
-      // 父亲调用孩子的方法
-      //this.$refs.maomao.fallInLove();
-      this.$children[1].fallInLove();
-    }
-  }
-}  
-``` 
+如果项目中同辈组件通信只有一两处，可以采用这样的方法，如果较多，不可取。建议使用vue推荐的状态管理方案Vuex。Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。
